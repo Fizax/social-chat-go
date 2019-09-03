@@ -8,6 +8,6 @@ class chatController extends Controller
 {
     //
     public function send(){
-        $chat = \DB::('SELECT * FROM products')
+        //$chat = \DB::('SELECT * FROM products');
     }
 }

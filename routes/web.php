@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('map', 'mapController');
 
 Route::get('/chat', function () {
-    return view('chat, chatController');
+    return view('chat');
 });
 
 
