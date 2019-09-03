@@ -59,7 +59,9 @@
                     async defer></script>
             </body>
             </html>
-
+            @else
+            <a href="{{ route('login') }}">Login</a>
+            
         @endauth
     </div>
 @endif
