@@ -56,7 +56,7 @@ class mapController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -79,6 +79,6 @@ class mapController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
