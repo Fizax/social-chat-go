@@ -13,7 +13,7 @@ class mapController extends Controller
      */
     public function index()
     {
-        return view('map');
+        return view('map/map');
     }
 
     /**
@@ -34,7 +34,8 @@ class mapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // locatie ophalen en opslaan in het database
+
     }
 
     /**
