@@ -12,14 +12,17 @@
 </head>
 <body>
 <div class="container">
-    <div class="chat">
-        <div class="chatbox">
-            <form method="POST" action="/devicesaction">
-            <textarea name="email" rows="4" cols="50"></textarea>
-            <button type="submit">Send Message</button>
-            </form>
+    <form action="{{ route('chat.store') }}" method="post">
+        @csrf
+
+        <div class="form-group">
+            <label for="chattext">Vul hier je chatbericht in</label>
+            <textarea rows="4" cols="50" class="input" name="chattext" id="chattext" required></textarea>
         </div>
-    </div>
+        <div class="form-group">
+            <input class="button" type="submit" value="Verzenden">
+        </div>
+    </form>
 
 </div>
 

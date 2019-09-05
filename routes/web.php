@@ -24,8 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('map', 'mapController');
 
-Route::get('/chat', function () {
-    return view('chat');
-});
+Route::resource('chat', 'chatController');
 
 
