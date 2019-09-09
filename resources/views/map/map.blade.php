@@ -60,6 +60,7 @@
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUF2YHjV8Z0quTDM5Gho29AHVnwsilPNs&callback=initMap"
                     async defer></script>
+            <!--
             <script>
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showLocation);
@@ -70,22 +71,22 @@
                         var longitude = position.coords.longitude;
 
                         <?php
-                        $user = auth()->user();
-                        $userId = $user->id;
+                        //$user = auth()->user();
+                        //$userId = $user->id;
 
 
 
-                        \DB::table('user_location')
-                            ->insert([
-                                'userId'    => $userId,
-                                'lon'       => $lon,
-                                'lat'       => $lat
+                        ////\DB::table('user_location')
+                            //->insert([
+                               // 'userId'    => $userId,
+                              //  'lon'       => $lon,
+                               // 'lat'       => $lat
 
 
-                            ])
+                           // ])
                         ?>
                     };
-                        </script>
+                        </script> -->
             </body>
             </html>
             @else
