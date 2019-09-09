@@ -17,7 +17,8 @@
                 <label for="interestTechnology">Technologie</label></div>
             <div class="interests-form-group">
                 <input type="checkbox" name="interestRecreation" value="Recreatie">
-                <label for="interestRecreation">Recreatie</label></div>
+                <label for="interestRecreation">Recreatie</label>
+            </div>
             <input type="submit" value="Bewerk">
         </form>
     </div>

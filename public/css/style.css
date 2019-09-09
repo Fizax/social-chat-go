@@ -3,16 +3,33 @@
     margin: 0;
 }
 
-<<<<<<< HEAD
 /*containers*/
 .container{
     margin: 0 auto;
     max-width: 960px;
 }
-=======
 .container{
     margin: 0 auto;
     max-width: 960px;
 }
 /*containers*/
->>>>>>> master
+
+
+/*Form*/
+.account-form-group{
+    margin-bottom: 10px;
+}
+
+.flex-form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-text-small{
+    max-width: 25%;
+}
+
+.input-text-big{
+    height: 100px;
+}
+/*Form*/
