@@ -60,7 +60,43 @@
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUF2YHjV8Z0quTDM5Gho29AHVnwsilPNs&callback=initMap"
                     async defer></script>
-            <!--
+
+            <script>
+                $(document).ready(function() {
+                    <!--#my-form grabs the form id-->
+                    $("#form").submit(function(e) {
+                        e.preventDefault();
+                        $.ajax( {
+                            <!--insert.php calls the PHP file-->
+                            url: "mapController.php",
+                            method: "post",
+                            data: $("form").serialize(),
+                            dataType: "text",
+                            success: function(strMessage) {
+                                $("#message").text(strMessage);
+                                $("#my-form")[0].reset();
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <form id="form" action="{{ route('map.store') }}" method="post">
+                @csrf
+
+                <div class="form-group">
+                    <label for="latitude">Vul hier de latitude in</label>
+                    <input class="input" type="text" name="latitude" id="latitude" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="longitude">Vul hier de longitude in</label>
+                    <input class="input" type="text" name="longitude" id="longitude" required>
+                </div>
+                <div class="form-group">
+                    <input class="button" type="submit" value="Locatie opslaan">
+                </div>
+            </form>
             <script>
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showLocation);
@@ -70,23 +106,23 @@
                         var latitude = position.coords.latitude;
                         var longitude = position.coords.longitude;
 
-                        <?php
-                        //$user = auth()->user();
-                        //$userId = $user->id;
-
-
-
-                        ////\DB::table('user_location')
-                            //->insert([
-                               // 'userId'    => $userId,
-                              //  'lon'       => $lon,
-                               // 'lat'       => $lat
-
-
-                           // ])
-                        ?>
+                        document.getElementById('latitude').value = latitude;
+                        document.getElementById('longitude').value = longitude;
                     };
-                        </script> -->
+
+                    window.onload=function(){
+                        var auto = setTimeout(function(){ autoRefresh(); }, 100);
+
+                        function submitform(){
+                            document.forms["form"].submit();
+                        }
+
+                        function autoRefresh(){
+                            clearTimeout(auto);
+                            auto = setTimeout(function(){ submitform(); autoRefresh(); }, 10000);
+                        }
+                    }
+                        </script>
             </body>
             </html>
             @else

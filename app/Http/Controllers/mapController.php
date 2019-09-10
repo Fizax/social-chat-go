@@ -34,7 +34,16 @@ class mapController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        $userId = $user->id;
         // locatie ophalen en opslaan in het database
+        \DB::table('user_location')
+            ->insert([
+                'userId' => $userId,
+                'lon' => $request->longitude,
+                'lat' => $request->latitude
+            ]);
+        return redirect()->route('map.index');
 
     }
 
