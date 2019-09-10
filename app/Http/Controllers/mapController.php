@@ -38,10 +38,12 @@ class mapController extends Controller
         $userId = $user->id;
         // locatie ophalen en opslaan in het database
         \DB::table('user_location')
-            ->insert([
+            ->where('userId', $userId)
+            ->update([
                 'userId' => $userId,
                 'lon' => $request->longitude,
                 'lat' => $request->latitude
+
             ]);
         return redirect()->route('map.index');
 
