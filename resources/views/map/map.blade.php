@@ -81,20 +81,20 @@
                 });
             </script>
 
-            <form id="form" action="{{ route('map.store') }}" method="post">
+            <form id="form" hidden action="{{ route('map.store') }}" method="post">
                 @csrf
 
                 <div class="form-group">
-                    <label for="latitude">Vul hier de latitude in</label>
-                    <input class="input" type="text" name="latitude" id="latitude" required>
+                    <label for="latitude" hidden>Vul hier de latitude in</label>
+                    <input class="input" hidden type="text" name="latitude" id="latitude" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="longitude">Vul hier de longitude in</label>
-                    <input class="input" type="text" name="longitude" id="longitude" required>
+                    <label for="longitude" hidden>Vul hier de longitude in</label>
+                    <input class="input" hidden type="text" name="longitude" id="longitude" required>
                 </div>
                 <div class="form-group">
-                    <input class="button" type="submit" value="Locatie opslaan">
+                    <input class="button" hidden type="submit" value="Locatie opslaan">
                 </div>
             </form>
             <script>
