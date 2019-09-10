@@ -37,10 +37,9 @@ class mapController extends Controller
         $user = auth()->user();
         $userId = $user->id;
         // locatie ophalen en opslaan in het database
-        \DB::table('user_location')
-            ->where('userId', $userId)
+        \DB::table('users')
+            ->where('id', $userId)
             ->update([
-                'userId' => $userId,
                 'lon' => $request->longitude,
                 'lat' => $request->latitude
 
