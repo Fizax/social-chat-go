@@ -13,8 +13,7 @@ class mapController extends Controller
      */
     public function index()
     {
-        $coordinates = \DB::select('SELECT u.id, u.lat, u.lon FROM users AS u');
-        return view('map/map', ['coordinates' => $coordinates]);
+        return view('map/map');
     }
 
     public function ajax()
