@@ -18,7 +18,7 @@ class mapController extends Controller
 
     public function ajax()
     {
-        $coordinates = \DB::select('SELECT u.id, u.lat, u.lon FROM users AS u');
+        $coordinates = \DB::select('SELECT u.id, u.lat, u.lon, u.name FROM users AS u');
         return $coordinates;
     }
 

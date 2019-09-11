@@ -45,7 +45,7 @@
                                         var marker = new google.maps.Marker({
                                             position: {lat: parseFloat(coords.lat), lng: parseFloat(coords.lon)},
                                             map: map,
-                                            title: 'This is the center of the map'
+                                            title: coords.name
                                         });
                                     }
 
