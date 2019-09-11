@@ -26,37 +26,39 @@
             <div id="map"></div>
             <script>
 
-
                 var map;
                 function initMap() {
-
                     // voeg hier de center van de map toe
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: {lat: 51.598897799999996, lng: 4.7735023},
                         zoom: 8
                     });
+                    setInterval( () => {
+                        fetch("/api")
+                            .then( data => data.json())
+                            .then( (data) => {
+                                // voor iedere item uit data
+                                // een nieuwe marker hier
+                                data.forEach( (coords) => {
+                                    // voeg hier je markers toe die je wilt.
+                                    if (coords.lat && coords.lon) {
+                                        var marker = new google.maps.Marker({
+                                            position: {lat: parseFloat(coords.lat), lng: parseFloat(coords.lon)},
+                                            map: map,
+                                            title: 'This is the center of the map'
+                                        });
+                                    }
 
-                    // voeg hier je markers toe die je wilt.
-                    var marker = new google.maps.Marker({
-                        position: {lat: -34.397, lng: 150.644},
-                        map: map,
-                        title: 'This is the center of the map'
-                    });
+                                } )
+                            })
+                    }, 1000 )
 
-                    var marker = new google.maps.Marker({
-                        position: {lat: -35.397, lng: 152.644},
-                        map: map,
-                        title: 'This is somewhere in the sea nearby...'
-                    });
 
-                    var marker = new google.maps.Marker({
-                        position: {lat: 51.598897799999996, lng: 4.7735023},
-                        map: map,
-                        title: 'This is somewhere north of the center'
-                    });
+
 
 
                 }
+
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUF2YHjV8Z0quTDM5Gho29AHVnwsilPNs&callback=initMap"
                     async defer></script>
@@ -110,19 +112,7 @@
                         document.getElementById('longitude').value = longitude;
                     };
 
-                    window.onload=function(){
-                        var auto = setTimeout(function(){ autoRefresh(); }, 100);
-
-                        function submitform(){
-                            document.forms["form"].submit();
-                        }
-
-                        function autoRefresh(){
-                            clearTimeout(auto);
-                            auto = setTimeout(function(){ submitform(); autoRefresh(); }, 10000);
-                        }
-                    }
-                        </script>
+            </script>
             </body>
             </html>
             @else

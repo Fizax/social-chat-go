@@ -26,3 +26,5 @@ Route::resource('chat', 'chatController');
 
 Route::get('/picture', 'pictureController@index');
 
+Route::get('/api', 'mapController@ajax');
+
