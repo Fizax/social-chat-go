@@ -110,7 +110,7 @@
 
                 setInterval(function() { setMarkers(); }, 1000);
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUF2YHjV8Z0quTDM5Gho29AHVnwsilPNs&callback=initMap"
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetzx8_ThHXS5KrLojrf3VqfHyHrSqHpc&callback=initMap"
                     async defer></script>
 
 
