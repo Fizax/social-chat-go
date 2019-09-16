@@ -26,77 +26,110 @@
             <div id="map"></div>
             <script>
 
-                var marker;
-                var map;
+                var map, infoWindow, userMarker;//, mapMarkers;
+
                 function initMap() {
-                    // voeg hier de center van de map toe
                     map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: 51.598897799999996, lng: 4.7735023},
-                        zoom: 8
+                        center: {lat: -34.397, lng: 150.644},
+                        zoom: 6
                     });
-
-                    console.log('test');
-                    var url = '/api/post';
-                    var data = { 'lat' : 8, 'lng' : 3};
-                    //var data = 'test';
-
-                    fetch(url, {
-                        method: 'POST', // or 'PUT'
-                        body: JSON.stringify(data), // data can be `string` or {object}!
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    }).then(res => res.json())
-                        .then(response => console.log('Success:', JSON.stringify(response)))
-                        .catch(error => console.error('Error:', error));
-
-                    setInterval( () => {
-                         
-                        fetch("/api")
-                            .then( data => data.json())
-                            .then( (data) => {
-                                // voor iedere item uit data
-                                // een nieuwe marker hier
-                                data.forEach( (coords) => {
-                                    // voeg hier je markers toe die je wilt.
-                                    if (coords.lat && coords.lon) {
-                                        var marker = new google.maps.Marker({
-                                            position: {lat: parseFloat(coords.lat), lng: parseFloat(coords.lon)},
-                                            map: map,
-                                            title: coords.name
-                                        });
-                                    }
-
-                                } )
-                            })
-                    }, 1000 )
+                    infoWindow = new google.maps.InfoWindow;
 
 
+                    // Try HTML5 geolocation.
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            var pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+
+                            // infoWindow.setPosition(pos);
+                            // infoWindow.setContent('Location found.');
+                            // infoWindow.open(map);
+                            map.setCenter(pos);
+
+                            userMarker = new google.maps.Marker({
+                                position: pos,
+                                map: map
+                            });
+
+
+                        }, function() {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        });
+                    } else {
+                        // Browser doesn't support Geolocation
+                        handleLocationError(false, infoWindow, map.getCenter());
+                    }
                 }
+
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+                    infoWindow.open(map);
+                }
+
+                function updateMarkers(markers){
+
+                    for (var i = 0; i < markers.length; i++)
+                    {
+                        var myLatLng = new google.maps.LatLng(markers[i]['lat'],markers[i]['lng']);
+                        console.log(myLatLng);
+                        var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            title : "test",
+                            map: map });
+                    }
+                }
+
+                function setMarkers(){
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var markers;
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        userMarker.position = pos;
+                        fetch(`./marker.php?lat=${pos.lat}&lng=${pos.lng}&`)
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(markersServer) {
+                                markers = markersServer;
+                                console.log(markers);
+                                this.updateMarkers(markers);
+                            });
+                    });
+                }
+
+                setInterval(function() { setMarkers(); }, 1000);
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUF2YHjV8Z0quTDM5Gho29AHVnwsilPNs&callback=initMap"
                     async defer></script>
 
 
-            <script>
-                $(document).ready(function() {
-                    <!--#my-form grabs the form id-->
-                    $("#form").submit(function(e) {
-                        e.preventDefault();
-                        $.ajax( {
-                            <!--insert.php calls the PHP file-->
-                            url: "mapController.php",
-                            method: "post",
-                            data: $("form").serialize(),
-                            dataType: "text",
-                            success: function(strMessage) {
-                                $("#message").text(strMessage);
-                                $("#my-form")[0].reset();
-                            }
-                        });
-                    });
-                });
-            </script>
+            {{--<script>--}}
+                {{--$(document).ready(function() {--}}
+                    {{--<!--#my-form grabs the form id-->--}}
+                    {{--$("#form").submit(function(e) {--}}
+                        {{--e.preventDefault();--}}
+                        {{--$.ajax( {--}}
+                            {{--<!--insert.php calls the PHP file-->--}}
+                            {{--url: "mapController.php",--}}
+                            {{--method: "post",--}}
+                            {{--data: $("form").serialize(),--}}
+                            {{--dataType: "text",--}}
+                            {{--success: function(strMessage) {--}}
+                                {{--$("#message").text(strMessage);--}}
+                                {{--$("#my-form")[0].reset();--}}
+                            {{--}--}}
+                        {{--});--}}
+                    {{--});--}}
+                {{--});--}}
+            {{--</script>--}}
 
             <form id="form" hidden action="{{ route('map.store') }}" method="post">
                 @csrf
