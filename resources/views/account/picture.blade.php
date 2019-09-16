@@ -12,12 +12,12 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="profile_picture" class="col-md-4 col-form-label text-md-right">Profiel Foto</label>
+                                <label for="image" class="col-md-4 col-form-label text-md-right">Profiel Foto</label>
 
                                 <div class="col-md-6">
-                                    <input type="file" name="profile_picture" value="image">
+                                    <input type="file" name="image" value="image">
 
-                                    @error('profile_pciture')
+                                    @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
