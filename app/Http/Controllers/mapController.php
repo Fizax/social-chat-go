@@ -40,17 +40,18 @@ class mapController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
-        $userId = $user->id;
-        // locatie ophalen en opslaan in het database
-        \DB::table('users')
-            ->where('id', $userId)
-            ->update([
-                'lon' => $request->longitude,
-                'lat' => $request->latitude
-
-            ]);
-        return redirect()->route('map.index');
+        return 'dit is een test';
+//        $user = auth()->user();
+//        $userId = $user->id;
+//        // locatie ophalen en opslaan in het database
+//        \DB::table('users')
+//            ->where('id', $userId)
+//            ->update([
+//                'lon' => $request->longitude,
+//                'lat' => $request->latitude
+//
+//            ]);
+//        return redirect()->route('map.index');
 
     }
 
