@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class mapController extends Controller
+class InterestsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,13 +13,7 @@ class mapController extends Controller
      */
     public function index()
     {
-        return view('map/map');
-    }
-
-    public function ajax()
-    {
-        $coordinates = \DB::select('SELECT u.id, u.lat, u.lon, u.name FROM users AS u');
-        return $coordinates;
+        return view('account.interests.index');
     }
 
     /**
@@ -40,19 +34,23 @@ class mapController extends Controller
      */
     public function store(Request $request)
     {
-        return 'dit is een test';
-//        $user = auth()->user();
-//        $userId = $user->id;
-//        // locatie ophalen en opslaan in het database
-//        \DB::table('users')
-//            ->where('id', $userId)
-//            ->update([
-//                'lon' => $request->longitude,
-//                'lat' => $request->latitude
-//
-//            ]);
-//        return redirect()->route('map.index');
+        $interestsArray = $request->input('interests');
+        $user = auth()->user();
 
+        $userId = $user->id;
+        $arraylength = count($interestsArray);
+        $i = 0;
+        while ($i < $arraylength)
+        {
+            \DB::table('user_hobby')
+                ->insert([
+                    'userId' => $userId,
+                    'hobbyId' => $interestsArray[$i]
+                ]);
+            $i++;
+        }
+
+       return redirect()->route('picture.index');
     }
 
     /**
@@ -74,7 +72,7 @@ class mapController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -86,7 +84,7 @@ class mapController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -97,6 +95,6 @@ class mapController extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
 }

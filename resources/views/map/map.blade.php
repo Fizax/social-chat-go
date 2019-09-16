@@ -26,6 +26,7 @@
             <div id="map"></div>
             <script>
 
+                var marker;
                 var map;
                 function initMap() {
                     // voeg hier de center van de map toe
@@ -33,7 +34,24 @@
                         center: {lat: 51.598897799999996, lng: 4.7735023},
                         zoom: 8
                     });
+
+                    console.log('test');
+                    var url = '/api/post';
+                    var data = { 'lat' : 8, 'lng' : 3};
+                    //var data = 'test';
+
+                    fetch(url, {
+                        method: 'POST', // or 'PUT'
+                        body: JSON.stringify(data), // data can be `string` or {object}!
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    }).then(res => res.json())
+                        .then(response => console.log('Success:', JSON.stringify(response)))
+                        .catch(error => console.error('Error:', error));
+
                     setInterval( () => {
+                         
                         fetch("/api")
                             .then( data => data.json())
                             .then( (data) => {
@@ -54,14 +72,11 @@
                     }, 1000 )
 
 
-
-
-
                 }
-
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUF2YHjV8Z0quTDM5Gho29AHVnwsilPNs&callback=initMap"
                     async defer></script>
+
 
             <script>
                 $(document).ready(function() {
@@ -100,17 +115,7 @@
                 </div>
             </form>
             <script>
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(showLocation);
-                    }
 
-                    function showLocation(position) {
-                        var latitude = position.coords.latitude;
-                        var longitude = position.coords.longitude;
-
-                        document.getElementById('latitude').value = latitude;
-                        document.getElementById('longitude').value = longitude;
-                    };
 
             </script>
             </body>
