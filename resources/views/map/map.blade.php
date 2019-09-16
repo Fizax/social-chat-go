@@ -93,11 +93,14 @@
                             lng: position.coords.longitude
                         };
                         userMarker.position = pos;
-                        fetch(`./marker.php?lat=${pos.lat}&lng=${pos.lng}&`)
+                        console.log(userMarker);
+                        fetch(`./marker.php?lat=${pos.lat}&lng=${pos.lng}`)
                             .then(function(response) {
+                                console.log(response);
                                 return response.json();
                             })
                             .then(function(markersServer) {
+
                                 markers = markersServer;
                                 console.log(markers);
                                 this.updateMarkers(markers);
