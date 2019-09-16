@@ -26,6 +26,7 @@
             <div id="map"></div>
             <script>
 
+                var marker;
                 var map;
                 function initMap() {
                     // voeg hier de center van de map toe
@@ -34,31 +35,23 @@
                         zoom: 8
                     });
 
-                    var url = '/api/post';
-                    var data = { 'latitude' : 'latitude'};
-                    //var data = 'test';
                     console.log('test');
+                    var url = '/api/post';
+                    var data = { 'lat' : 8, 'lng' : 3};
+                    //var data = 'test';
+
                     fetch(url, {
                         method: 'POST', // or 'PUT'
-                        body: JSON.stringify({data:"test"}), // data can be `string` or {object}!
+                        body: JSON.stringify(data), // data can be `string` or {object}!
                         headers: {
                             'Content-Type': 'application/json',
-                            @csrf
                         }
                     }).then(res => res.json())
                         .then(response => console.log('Success:', JSON.stringify(response)))
                         .catch(error => console.error('Error:', error));
-/*
+
                     setInterval( () => {
-                        // navigator.geolocation.getCurrentPosition(function(position) {
-                        //
-                        //     var marker;
-                        //     var pos = {
-                        //         lat: position.coords.latitude,
-                        //         lng: position.coords.longitude
-                        //     };
-                        //     marker.position = pos;
-                        // }
+                         
                         fetch("/api")
                             .then( data => data.json())
                             .then( (data) => {
@@ -77,9 +70,6 @@
                                 } )
                             })
                     }, 1000 )
-
-*/
-
 
 
                 }
