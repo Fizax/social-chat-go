@@ -30,9 +30,15 @@ $marker = array(
 $coords = \DB::select('SELECT lat, lon as lng, name FROM users');
 
 
+<<<<<<< Updated upstream
 
 $lat = $_GET['lat'];
 $lon = $_GET['lng'];
+=======
+$lon = $_GET['lat'];
+$lat = $_GET['lng'];
+
+>>>>>>> Stashed changes
 
 $user = auth()->user();
         $userId = $user->id;
