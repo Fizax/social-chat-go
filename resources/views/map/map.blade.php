@@ -51,6 +51,7 @@
 
                             userMarker = new google.maps.Marker({
                                 position: pos,
+                                title : "dit bent u",
                                 map: map
                             });
 
@@ -80,7 +81,7 @@
                         console.log(myLatLng);
                         var marker = new google.maps.Marker({
                             position: myLatLng,
-                            title : "test",
+                            title : markers[i]['name'],
                             map: map });
                     }
                 }

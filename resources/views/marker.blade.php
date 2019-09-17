@@ -27,7 +27,22 @@ $marker = array(
 );
 */
 
-$coords = \DB::select('SELECT lat, lon, name FROM users');
+$coords = \DB::select('SELECT lat, lon as lng, name FROM users');
+
+$lat = $_GET['lat'];
+$lon = $_GET['lng'];
+
+$user = auth()->user();
+        $userId = $user->id;
+        // locatie ophalen en opslaan in het database
+        \DB::table('users')
+            ->where('id', $userId)
+            ->update([
+                'lon' => $lat,
+                'lat' => $lon
+
+            ]);
+
 
 
 
@@ -35,7 +50,6 @@ $coords = \DB::select('SELECT lat, lon, name FROM users');
 
 /*data vanaf het formulier, dus update user table data
 Plaats deze data in de user tabel doormiddel vam een update */
-$lat = $_GET['lat'];
-$lon = $_GET['lng'];
+
 
 echo json_encode($coords);
