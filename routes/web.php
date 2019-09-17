@@ -28,7 +28,6 @@ Route::get('/picture', 'pictureController@index');
 
 Route::get('/api', 'mapController@ajax');
 
-Route::post('/marker', 'mapController@update');
 
 Route::get('/marker', function () {
     return view('marker');

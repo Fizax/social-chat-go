@@ -29,6 +29,8 @@ $marker = array(
 
 $coords = \DB::select('SELECT lat, lon as lng, name FROM users');
 
+
+
 $lat = $_GET['lat'];
 $lon = $_GET['lng'];
 
@@ -38,10 +40,11 @@ $user = auth()->user();
         \DB::table('users')
             ->where('id', $userId)
             ->update([
-                'lon' => $lat,
-                'lat' => $lon
+                'lon' => $lon,
+                'lat' => $lat
 
             ]);
+
 
 
 
