@@ -24,10 +24,7 @@
 //
 //echo json_encode($coords);
 
-
-
 header('Content-Type: application/json');
-
 
 /* data uit database terug naar vorig form */
 $marker = array(
@@ -43,9 +40,3 @@ $lat = $_GET['lat'];
 $lon = $_GET['lng'];
 
 echo json_encode($marker);
-
-
-
-
-
-

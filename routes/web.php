@@ -30,3 +30,6 @@ Route::get('/api', 'mapController@ajax');
 
 Route::post('/api/post', 'mapController@store');
 
+Route::get('/marker', function () {
+    return view('marker');
+});

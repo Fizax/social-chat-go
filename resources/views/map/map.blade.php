@@ -94,15 +94,16 @@
                         };
                         userMarker.position = pos;
                         console.log(userMarker);
-                        fetch(`./marker.php?lat=${pos.lat}&lng=${pos.lng}`)
+                        fetch(`http://localhost:8000/marker?lat=${pos.lat}&lng=${pos.lng}`)
                             .then(function(response) {
-                                console.log(response);
+
+                                console.log(response.json());
+
                                 return response.json();
                             })
                             .then(function(markersServer) {
 
                                 markers = markersServer;
-                                console.log(markers);
                                 this.updateMarkers(markers);
                             });
                     });
