@@ -26,11 +26,6 @@
                         @endif
                     @endauth
             @endif
-        <div class="index-login-form">
-            <button class="index-login-btn">Register!</button>
-            <span>or</span>
-            <button class="index-login-btn">Login</button>
-        </div>
     </div>
 </header>
 <main>
