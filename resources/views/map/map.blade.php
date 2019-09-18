@@ -27,7 +27,7 @@
             <script>
 
                 var map, infoWindow, userMarker;//, mapMarkers;
-
+                var activeMarkers = [];
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: {lat: -34.397, lng: 150.644},
@@ -75,14 +75,23 @@
 
                 function updateMarkers(markers){
 
+                    activeMarkers.forEach((marker) => {
+
+                        marker.setMap(null);
+                    });
+                    activeMarkers = [];
+
                     for (var i = 0; i < markers.length; i++)
                     {
+
                         var myLatLng = new google.maps.LatLng(markers[i]['lat'],markers[i]['lng']);
                         console.log(myLatLng);
                         var marker = new google.maps.Marker({
                             position: myLatLng,
                             title : markers[i]['name'],
                             map: map });
+
+                        activeMarkers.push(marker);
                     }
                 }
 
@@ -102,6 +111,7 @@
                             .then(function(markersServer) {
 
                                 markers = markersServer;
+
                                 this.updateMarkers(markers);
                             });
                     });
