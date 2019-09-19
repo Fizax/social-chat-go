@@ -50,7 +50,7 @@ class InterestsController extends Controller
             $i++;
         }
 
-       return redirect()->route('picture.index');
+       return redirect()->route('account.index');
     }
 
     /**
@@ -72,7 +72,7 @@ class InterestsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('account.interests.index');
     }
 
     /**
@@ -84,7 +84,27 @@ class InterestsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        \DB::table('user_hobby')
+            ->delete()
+            ->where('userId', $id);
+
+        $interestsArray = $request->input('interests');
+        $user = auth()->user();
+
+        $userId = $user->id;
+        $arraylength = count($interestsArray);
+        $i = 0;
+        while ($i < $arraylength)
+        {
+            \DB::table('user_hobby')
+                ->insert([
+                    'userId' => $userId,
+                    'hobbyId' => $interestsArray[$i]
+                ]);
+            $i++;
+        }
+
+        return redirect()->route(back());
     }
 
     /**
@@ -95,6 +115,6 @@ class InterestsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->action('InterestsController@store');
     }
 }

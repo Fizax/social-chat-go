@@ -51,7 +51,15 @@ class accountController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $account = \DB::table('user_hobby')
+            ->join('users', 'users.id', '=', 'user_hobby.userId')
+            ->join('hobbies', 'hobbies.id', '=', 'user_hobby.hobbyId')
+            ->select('users.*', 'hobbies.name' ,'users.name as username')
+            ->where('users.id', $id)
+            ->get();
+
+        return view('account.show', ['account' => $account]);
     }
 
     /**
@@ -62,7 +70,7 @@ class accountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $interests = \DB::table('');
     }
 
     /**

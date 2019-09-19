@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Interests') }}</div>
                     <div class="card-body">
-                        <form method="post" action="{{route('interests.store')}}">
+                        <form method="post" action="{{route('interests.delete')}}">
                             @csrf
                             <div class="form-group row">
                                 <input type="checkbox" name="interests[]" value="1">
@@ -43,4 +43,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection

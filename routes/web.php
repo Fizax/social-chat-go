@@ -15,14 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('/account/interests', 'InterestsController');
+
 Route::resource('account', 'accountController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('map', 'mapController');
+Route::resource('/map', 'mapController');
 
-Route::resource('chat', 'chatController');
+Route::resource('/chat', 'chatController');
 
 Route::get('/picture', 'pictureController@index');
 
