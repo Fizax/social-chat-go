@@ -1,22 +1,6 @@
 <?php
 
 header('Content-Type: application/json');
-//
-//
-//$dbHost = 'localhost';
-//$dbName = 'socialapp';
-//$dbUser = 'root';
-//$dbPass = '';
-//
-//$db = new PDO(
-//    "mysql:host=$dbHost;dbname=$dbName",
-//    $dbUser,
-//    $dbPass
-//);
-//// hier vang die de error op
-//$db->setAttribute(
-//    PDO::ATTR_ERRMODE,
-//    PDO::ERRMODE_EXCEPTION
 
 /* data uit database terug naar vorig form
 Haal alle data op uit de user tabellen welke beschikbaar zijn

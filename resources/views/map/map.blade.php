@@ -28,8 +28,6 @@
 
 
 
-
-
                 var map, infoWindow, userMarker;//, mapMarkers;
                 var activeMarkers = [];
                 function initMap() {
