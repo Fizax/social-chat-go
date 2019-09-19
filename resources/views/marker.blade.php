@@ -26,25 +26,34 @@ $marker = array(
     ['lat'=>2.7788481178788205,'lng'=>51.60656920854833]
 );
 */
+use Illuminate\Support\Facades\Auth;
+
 
 $coords = \DB::select('SELECT lat, lon as lng, name FROM users');
-
-
-
 $lat = $_GET['lat'];
 $lon = $_GET['lng'];
 
-$user = auth()->user();
-        $userId = $user->id;
-        // locatie ophalen en opslaan in het database
-        \DB::table('users')
-            ->where('id', $userId)
-            ->update([
-                'lon' => $lon,
-                'lat' => $lat
+if (Auth::check()) {
+    $user = auth()->user();
+    $userId = $user->id;
+    // locatie ophalen en opslaan in het database
+    \DB::table('users')
+        ->where('id', $userId)
+        ->update([
+            'lon' => null,
+            'lat' => null
 
-            ]);
-
+        ]);
+}else
+    $user = auth()->user();
+$userId = $user->id;
+// locatie ophalen en opslaan in het database
+\DB::table('users')
+    ->where('id', $userId)
+    ->update([
+        'lon' => $lon,
+        'lat' => $lat
+    ]);
 
 
 
