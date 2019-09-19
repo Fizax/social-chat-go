@@ -93,7 +93,6 @@
 
 
                         var myLatLng = new google.maps.LatLng(markers[i]['lat'],markers[i]['lng']);
-                        console.log(myLatLng);
                         var marker = new google.maps.Marker({
                             position: myLatLng,
                             title : markers[i]['name'],
@@ -109,6 +108,7 @@
                 }
 
                 function setMarkers(){
+
                     navigator.geolocation.getCurrentPosition(function(position) {
                         var markers;
                         var pos = {
