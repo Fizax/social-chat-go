@@ -26,6 +26,10 @@
             <div id="map"></div>
             <script>
 
+
+
+
+
                 var map, infoWindow, userMarker;//, mapMarkers;
                 var activeMarkers = [];
                 function initMap() {
@@ -81,16 +85,25 @@
                     });
                     activeMarkers = [];
 
+
                     for (var i = 0; i < markers.length; i++)
-                    {
+                    { var infowindow = new google.maps.InfoWindow({
+                        content: markers[i]['name']
+                    });
+
 
                         var myLatLng = new google.maps.LatLng(markers[i]['lat'],markers[i]['lng']);
                         var marker = new google.maps.Marker({
                             position: myLatLng,
                             title : markers[i]['name'],
                             map: map });
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
+                        });
 
                         activeMarkers.push(marker);
+
+
                     }
                 }
 
